@@ -11,6 +11,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 {
     if (bGameOver)
     {
+        // WHY: User has finished game, and they have hit enter. 
         ClearScreen();
         InitGame();    
        
@@ -26,6 +27,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         {
             --Lives;
             PrintLine(TEXT("Lost a Life"));
+
             if (Lives > 0)
             {
                 PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);
@@ -37,19 +39,16 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
             }    
         }
     }
-    
-
 } 
 
 void UBullCowCartridge::InitGame()
 {
-    // Welcome Player
-    PrintLine(TEXT("Welcome to Bull Cow Game"));
     // Set Gamestate
-    // GameWon = false;
     HiddenWord = "chump";
     Lives = 3;
     bGameOver = false;
+    
+    PrintLine(TEXT("Welcome to Bull Cow Game"));
     PrintLine(TEXT("Guess the %i letter word, you have %i lives"), HiddenWord.Len(), Lives);
 }
 
