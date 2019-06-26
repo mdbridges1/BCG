@@ -4,50 +4,53 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+    InitGame();
+}
+
+void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
+{
+    if (bGameOver)
+    {
+        ClearScreen();
+        InitGame();    
+       
+    }
+    else
+    {
+        if (Input == HiddenWord)
+        {
+            PrintLine(TEXT("You Win"));
+            PrintLine(TEXT("Press Return to play again")); 
+            bGameOver = true;
+        }
+        else
+        {
+            --Lives;
+            PrintLine(TEXT("Lost a Life"));
+            if (Lives > 0)
+            {
+                PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);
+            }
+            else
+            {
+                PrintLine(TEXT("No lives left!"));
+                bGameOver = true;
+                PrintLine(TEXT("Press Return to play again"));            
+            }    
+        }
+    }
+    
+
+} 
+
+void UBullCowCartridge::InitGame()
+{
     // Welcome Player
     PrintLine(TEXT("Welcome to Bull Cow Game"));
     // Set Gamestate
     // GameWon = false;
     HiddenWord = "chump";
     Lives = 3;
+    bGameOver = false;
     PrintLine(TEXT("Guess the %i letter word, you have %i lives"), HiddenWord.Len(), Lives);
-}
-
-void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
-{
-    // Check Lives 
-    // Check Player Input
-    // while(GameWon = false)
-
-    // if (Lives > 0)
-    
-    
-    if (Input == HiddenWord)
-    {
-        PrintLine(TEXT("You Win"));
-    }
-    else
-    {
-        --Lives;
-        PrintLine(TEXT("Lost a Life"));
-        if (Lives > 0)
-        {
-            PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);
-        }
-        else
-        {
-            PrintLine(TEXT("No lives left!"));
-            PrintLine(TEXT("Want to play again?"));
-        }
-        
-    }
-
-    
-    
-    
-    
-    
-    // Display Fail Win
-    
-    // Play Again / Quit
 }
