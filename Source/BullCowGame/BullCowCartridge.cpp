@@ -24,7 +24,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::InitGame()
 {
     // Set Gamestate
-    HiddenWord = "chump";
+    HiddenWord = TEXT("chump");
     Lives = 3;
     bGameOver = false;
     
