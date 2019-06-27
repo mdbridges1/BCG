@@ -44,21 +44,28 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     {
         PrintLine(TEXT("You Win"));
         EndGame();
+        return;
     }
-    else
-    {
-        SubtractLife();
 
-        if (Lives > 0)
-        {
-            PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);
-        }
-        else
-        {
-            PrintLine(TEXT("No lives left!"));
-            EndGame();         
-        }    
+    if (Guess.Len() != HiddenWord.Len())
+    {
+        PrintLine(TEXT("Wrong number of characters."));
+        PrintLine(TEXT("The hidden word is %i in length."), HiddenWord.Len());
+        return;
     }
+
+        
+    SubtractLife();
+
+    if (Lives <= 0)
+    {
+        PrintLine(TEXT("No lives left!"));
+        EndGame();   
+        return;
+    }    
+
+    PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);  
+    
 }
 
 void UBullCowCartridge::SubtractLife()
@@ -66,3 +73,11 @@ void UBullCowCartridge::SubtractLife()
     --Lives;
     PrintLine(TEXT("Lost a Life"));
 }
+
+// Does guess match case - not needed with FString
+// Check is Isogram
+// Checking Length DONE
+
+
+// Report Bulls And Cows
+
