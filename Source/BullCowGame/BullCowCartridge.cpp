@@ -152,6 +152,11 @@ FString UBullCowCartridge::SetStartingWord(/*SelectedDifficulty*/)
         {
             PrintLine(TEXT("Not An Isogram "));
         }
+
+    // Setting HiddenWord to Word from List
+
+    HiddenWord = *WordCollection[3]; // Has become case sensitve?
+    
     
     return "OK";
 }
