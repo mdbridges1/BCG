@@ -120,18 +120,23 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
                 ++Cows;
             }
         }
-        
     }
     
     PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
 }
-// Report Bulls And Cows
-// Going to be similar to Isogram check
 
-// For each letter in Word check against every HiddenWord letter
-// If it is in word and in same place ++bull
-// If it is in the word not in same place ++cow
+// List of Possible Words
+// Get Player Difficulty -1-2-3
+// Reuse IsIsogram to test
+// Remove all Words > 10 || < 3 Letters
+// Difficulty 1 = 3-5 Letter Word 
+// Difficulty 1 = 6-8 Letter Word
+// Difficulty 1 = 9 - 10 Letter
+// Pick at Random a word from List (TArray) 
+// Make length of word link to number or lives
+// Set Random word as Hidden Word
 
-// return bulls and cows
+// Random Words
+
 
 
