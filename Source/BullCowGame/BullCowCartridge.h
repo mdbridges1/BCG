@@ -20,7 +20,8 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void SubtractLife();
 	bool IsIsogram(FString Word);
 	void PrintBullCows(FString Guess);
-	FString SetStartingWord();
+	void SetStartingWord();
+	// void RemoveFromList(int32 ArraySize); cannot factor out-  skill missing
 
 	// Your declarations go below!
 	private:

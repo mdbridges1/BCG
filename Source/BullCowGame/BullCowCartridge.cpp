@@ -17,7 +17,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
     else
     {
-        ProcessGuess(Input);
+        ProcessGuess(Input.ToLower());
     }
 } 
 
@@ -30,7 +30,7 @@ void UBullCowCartridge::InitGame()
     bGameOver = false;
     
     PrintLine(TEXT("Welcome to Bull Cow Game"));
-    PrintLine(TEXT("Guess the %i letter word, you have %i lives"), HiddenWord.Len(), Lives);
+    PrintLine(TEXT("Guess the %i letter word. \nYou have %i lives"), HiddenWord.Len(), Lives);
 }
 
 void UBullCowCartridge::EndGame()
@@ -127,58 +127,55 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
 }
 
 // List of Possible Words IMPLEMENTED
-// Get Player Difficulty -1-2-3
 // Reuse IsIsogram to test IMPLEMENETED
-// Remove all Words > 10 || < 3 Letters
+// Remove all Words > 10 || < 3 Letters IMPLEMENETED 
+// Pick at Random a word from List (TArray) IMPLEMENETED
+// Set Random word as Hidden Word IMPLEMENETED
+
+// Get Player Difficulty -1-2-3
 // Difficulty 1 = 3-5 Letter Word 
 // Difficulty 1 = 6-8 Letter Word
 // Difficulty 1 = 9 - 10 Letter
-// Pick at Random a word from List (TArray) 
 // Make length of word link to number or lives
-// Set Random word as Hidden Word
-
 // Random Words
 
-
-FString UBullCowCartridge::SetStartingWord(/*SelectedDifficulty*/)
+void UBullCowCartridge::SetStartingWord(/*SelectedDifficulty*/)
 {
+    //Don't like that the List is stored here!
     TArray<FString> WordCollection = {"a", "ability", "Creeper", "Boris", "qazwsxedcrfv", "Sixth"}; 
-   
-   int32 ArraySize = WordCollection.Num();
+    FString ListWord;
+    int32 ArraySize = WordCollection.Num();
+
     // Check List for validity
     for (int32 CollectionIndex = 0; CollectionIndex < ArraySize; ++CollectionIndex)
     {
         if (!IsIsogram(*WordCollection[CollectionIndex]))
         {
+            // RemoveFromList(); // Lacking skill to factor out (or brain capacity!)
             WordCollection.RemoveAt(CollectionIndex);
             --ArraySize;
             --CollectionIndex; // Because if two isograms are next to each other it'll be skipped over
         }
     }
-    // Check Minimum length
+
+    // Check minimum length
     for (int32 CollectionIndex = 0; CollectionIndex < ArraySize; ++CollectionIndex)
     {
-        FString ListWord = *WordCollection[CollectionIndex];
+        ListWord = *WordCollection[CollectionIndex];
         if (ListWord.Len() < 4 || ListWord.Len() > 10)
         {
             WordCollection.RemoveAt(CollectionIndex);
             --ArraySize;
-            --CollectionIndex; // Because if two isograms are next to each other it'll be skipped over
+            --CollectionIndex;
         }
     }
-    // Setting HiddenWord to RANDOM Word from List   
-    HiddenWord = *WordCollection[rand() % WordCollection.Num()]; // Has become case sensitve?
-    
 
-    //Testing getting list size
-    PrintLine(TEXT("Number of Words: %i"), WordCollection.Num());
-    //Test getting the forth word from the list
+    HiddenWord = *WordCollection[rand() % WordCollection.Num()]; // Has become case sensitve suddenly?
+    HiddenWord = HiddenWord.ToLower(); // Can this be done in one line?
+
+    //DEBUG LINES
+    PrintLine(TEXT("Number of Words: %i"), WordCollection.Num());    
     PrintLine(TEXT("Word is: %s"), *HiddenWord);
-    //Test if forth word is isogram
-    
-    
-    
 
-    
-    return "OK";
 }
+
