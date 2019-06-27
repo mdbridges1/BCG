@@ -142,7 +142,7 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
 
 FString UBullCowCartridge::SetStartingWord(/*SelectedDifficulty*/)
 {
-    TArray<FString> WordCollection = {"a", "ability", "Creeper", "Boris", "ThisWordIsTooLong", "Sixth"}; 
+    TArray<FString> WordCollection = {"a", "ability", "Creeper", "Boris", "qazwsxedcrfv", "Sixth"}; 
    
    int32 ArraySize = WordCollection.Num();
     // Check List for validity
@@ -155,13 +155,21 @@ FString UBullCowCartridge::SetStartingWord(/*SelectedDifficulty*/)
             --CollectionIndex; // Because if two isograms are next to each other it'll be skipped over
         }
     }
-
+    // Check Minimum length
+    for (int32 CollectionIndex = 0; CollectionIndex < ArraySize; ++CollectionIndex)
+    {
+        FString ListWord = *WordCollection[CollectionIndex];
+        if (ListWord.Len() < 4 || ListWord.Len() > 10)
+        {
+            WordCollection.RemoveAt(CollectionIndex);
+            --ArraySize;
+            --CollectionIndex; // Because if two isograms are next to each other it'll be skipped over
+        }
+    }
     // Setting HiddenWord to RANDOM Word from List   
     HiddenWord = *WordCollection[rand() % WordCollection.Num()]; // Has become case sensitve?
-    //Checking HiddenWord is Valid
+    
 
-    
-    
     //Testing getting list size
     PrintLine(TEXT("Number of Words: %i"), WordCollection.Num());
     //Test getting the forth word from the list
