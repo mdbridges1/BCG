@@ -54,7 +54,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         return;
     }
 
-    if (!IsIsogram())
+    if (!IsIsogram(Guess))
     {
         PrintLine(TEXT("You haven't entered an isogram"));
         PrintLine(TEXT("Remember, no repeating letters."));
@@ -71,7 +71,6 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     }    
 
     PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);  
-    
 }
 
 void UBullCowCartridge::SubtractLife()
@@ -80,21 +79,20 @@ void UBullCowCartridge::SubtractLife()
     PrintLine(TEXT("Lost a Life"));
 }
 
-bool UBullCowCartridge::IsIsogram()
+bool UBullCowCartridge::IsIsogram(FString Word)
 {
-    // For each letter
-    // Start at letter 0
-    // compare against letter 1 - HiddenWord.len() -1
-    // if same return false
-    // if true continue to next letter    
-
+    for (int32 CurrentLetterIndex = 0; CurrentLetterIndex < Word.Len(); ++CurrentLetterIndex)
+    {      
+        for (int32 ComparisonLetterIndex = CurrentLetterIndex + 1; ComparisonLetterIndex < Word.Len(); ++ComparisonLetterIndex)
+        {
+            if (Word[CurrentLetterIndex] == Word[ComparisonLetterIndex])
+            {
+                return false;
+            }
+        } 
+    }
     return true;
 }
-
-// Does guess match case - not needed with FString
-// Check is Isogram
-// Checking Length DONE
-
 
 // Report Bulls And Cows
 
