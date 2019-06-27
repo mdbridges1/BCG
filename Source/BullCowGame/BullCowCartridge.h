@@ -19,6 +19,7 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void ProcessGuess(FString Guess);
 	void SubtractLife();
 	bool IsIsogram(FString Word);
+	void PrintBullCows(FString Guess);
 
 	// Your declarations go below!
 	private:

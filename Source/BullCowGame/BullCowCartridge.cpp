@@ -60,15 +60,18 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         PrintLine(TEXT("Remember, no repeating letters."));
         return;
     }
-        
+
     SubtractLife();
 
     if (Lives <= 0)
     {
         PrintLine(TEXT("No lives left!"));
+        PrintLine(TEXT("The word was: %s"), *HiddenWord);
         EndGame();   
         return;
     }    
+
+    PrintBullCows(Guess);
 
     PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);  
 }
@@ -94,5 +97,41 @@ bool UBullCowCartridge::IsIsogram(FString Word)
     return true;
 }
 
+void UBullCowCartridge::PrintBullCows(FString Guess)
+{
+    int32 Bulls = 0;
+    int32 Cows = 0;
+
+    for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); ++GuessIndex)
+    {
+        // Looking for bulls
+        if (Guess[GuessIndex] == HiddenWord[GuessIndex])
+        {
+            ++Bulls;
+            // You  might inuit this: ++GuessIndex - but it wont work :-(
+            continue;    // we could have if else'd this for loop
+        }
+
+        // Looking for cows
+        for (int32 HiddenIndex = 0; HiddenIndex < HiddenWord.Len(); ++HiddenIndex)
+        {
+            if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
+            {
+                ++Cows;
+            }
+        }
+        
+    }
+    
+    PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
+}
 // Report Bulls And Cows
+// Going to be similar to Isogram check
+
+// For each letter in Word check against every HiddenWord letter
+// If it is in word and in same place ++bull
+// If it is in the word not in same place ++cow
+
+// return bulls and cows
+
 
