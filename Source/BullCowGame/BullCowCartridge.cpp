@@ -24,7 +24,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::InitGame()
 {
     // Set Gamestate
-    HiddenWord = TEXT("chump");
+    SetStartingWord();
+    //HiddenWord = TEXT("chump");
     Lives = 3;
     bGameOver = false;
     
@@ -125,9 +126,9 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
     PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
 }
 
-// List of Possible Words
+// List of Possible Words IMPLEMENTED
 // Get Player Difficulty -1-2-3
-// Reuse IsIsogram to test
+// Reuse IsIsogram to test IMPLEMENETED
 // Remove all Words > 10 || < 3 Letters
 // Difficulty 1 = 3-5 Letter Word 
 // Difficulty 1 = 6-8 Letter Word
@@ -139,4 +140,18 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
 // Random Words
 
 
-
+FString UBullCowCartridge::SetStartingWord(/*SelectedDifficulty*/)
+{
+    TArray<FString> WordCollection = {"a", "ability", "Creeper", "Boris", "ThisWordIsTooLong", "Sixth"}; 
+    //Testing getting list size
+    PrintLine(TEXT("Number of Words is: %i"), WordCollection.Max());
+    //Test getting the forth word from the list
+    PrintLine(TEXT("forth Word is: %s"), *WordCollection[3]);
+    //Test if forth word is isogram
+    if (!IsIsogram(*WordCollection[3]))
+        {
+            PrintLine(TEXT("Not An Isogram "));
+        }
+    
+    return "OK";
+}
