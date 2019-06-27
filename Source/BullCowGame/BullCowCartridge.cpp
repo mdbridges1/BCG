@@ -54,6 +54,12 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         return;
     }
 
+    if (!IsIsogram())
+    {
+        PrintLine(TEXT("You haven't entered an isogram"));
+        PrintLine(TEXT("Remember, no repeating letters."));
+        return;
+    }
         
     SubtractLife();
 
@@ -72,6 +78,17 @@ void UBullCowCartridge::SubtractLife()
 {
     --Lives;
     PrintLine(TEXT("Lost a Life"));
+}
+
+bool UBullCowCartridge::IsIsogram()
+{
+    // For each letter
+    // Start at letter 0
+    // compare against letter 1 - HiddenWord.len() -1
+    // if same return false
+    // if true continue to next letter    
+
+    return true;
 }
 
 // Does guess match case - not needed with FString
