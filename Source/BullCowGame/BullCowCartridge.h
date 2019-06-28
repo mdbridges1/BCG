@@ -21,7 +21,7 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void SubtractLife();
 	bool IsIsogram(FString Word) const;
 	void PrintBullCows(FString Guess);
-	void SetStartingWord();
+	FString GetStartingWord();
 	TArray<FString> FilterForIsograms(TArray<FString> WordList) const; 
 	TArray<FString> FilterLength(TArray<FString> WordList) const; 
 

@@ -33,7 +33,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::InitGame()
 {
     // Set Gamestate
-    SetStartingWord();
+    HiddenWord = GetStartingWord();
+   
     Lives = HiddenWord.Len(); //Good enough difficulty adjustment for now
     bGameOver = false;
     
@@ -134,16 +135,18 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
     PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
 }
 
-void UBullCowCartridge::SetStartingWord()
+FString UBullCowCartridge::GetStartingWord()
 {
-    TArray<FString> IsogramList = FilterForIsograms(WordCollection);
-    TArray<FString> RemoveTooLongShort = FilterLength(IsogramList);
+    
+    TArray<FString> FilterWordList = FilterForIsograms(WordCollection);
+    FilterWordList = FilterLength(FilterWordList);
 
-    HiddenWord = RemoveTooLongShort[FMath::RandRange(0, RemoveTooLongShort.Num() - 1)].ToLower(); // Has become case sensitve suddenly?
+    FString FoundWord = FilterWordList[FMath::RandRange(0, FilterWordList.Num() - 1)].ToLower(); // Has become case sensitve suddenly?
 
+    return FoundWord;
     // DEBUG LINES
-    PrintLine(TEXT("Number of Words: %i"), RemoveTooLongShort.Num());    
-    PrintLine(TEXT("Word is: %s"), *HiddenWord);
+    // PrintLine(TEXT("Number of Words: %i"), FilterWordList.Num());    
+    // PrintLine(TEXT("Word is: %s"), *HiddenWord);
 }
 
 TArray<FString> UBullCowCartridge::FilterForIsograms(TArray<FString> WordList) const
