@@ -6,6 +6,7 @@
 #include "Console/Cartridge.h"
 #include "BullCowCartridge.generated.h"
 
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 {
@@ -18,10 +19,10 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void EndGame();
 	void ProcessGuess(FString Guess);
 	void SubtractLife();
-	bool IsIsogram(FString Word);
+	bool IsIsogram(FString Word) const;
 	void PrintBullCows(FString Guess);
 	void SetStartingWord();
-	// void RemoveFromList(int32 ArraySize); cannot factor out-  skill missing
+	TArray<FString> FilterForIsograms(TArray<FString> WordList) const; 
 
 	// Your declarations go below!
 	private:
