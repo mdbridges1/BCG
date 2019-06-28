@@ -23,6 +23,7 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void PrintBullCows(FString Guess);
 	void SetStartingWord();
 	TArray<FString> FilterForIsograms(TArray<FString> WordList) const; 
+	TArray<FString> FilterLength(TArray<FString> WordList) const; 
 
 	// Your declarations go below!
 	private:

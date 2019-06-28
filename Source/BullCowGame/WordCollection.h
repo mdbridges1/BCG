@@ -2,6 +2,7 @@
 
 const TArray<FString> WordCollection =
 {
+    TEXT("qwertyuiopa"), // Testing greater than 10 Char 
     TEXT("a"), 
     TEXT("ability"), 
     TEXT("able"), 

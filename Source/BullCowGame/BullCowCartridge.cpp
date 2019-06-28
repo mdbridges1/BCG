@@ -137,11 +137,12 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
 void UBullCowCartridge::SetStartingWord()
 {
     TArray<FString> IsogramList = FilterForIsograms(WordCollection);
+    TArray<FString> RemoveTooLongShort = FilterLength(IsogramList);
 
-    HiddenWord = IsogramList[FMath::RandRange(0, IsogramList.Num() - 1)].ToLower(); // Has become case sensitve suddenly?
+    HiddenWord = RemoveTooLongShort[FMath::RandRange(0, RemoveTooLongShort.Num() - 1)].ToLower(); // Has become case sensitve suddenly?
 
     // DEBUG LINES
-    PrintLine(TEXT("Number of Words: %i"), IsogramList.Num());    
+    PrintLine(TEXT("Number of Words: %i"), RemoveTooLongShort.Num());    
     PrintLine(TEXT("Word is: %s"), *HiddenWord);
 }
 
@@ -158,3 +159,16 @@ TArray<FString> UBullCowCartridge::FilterForIsograms(TArray<FString> WordList) c
     }
     return IsogramList;
 } 
+
+TArray<FString> UBullCowCartridge::FilterLength(TArray<FString> WordList) const
+{
+    TArray<FString> RightLengthWords;
+
+    for (int32 CollectionIndex = 0; CollectionIndex < WordList.Num(); ++CollectionIndex)
+        
+        if (WordList[CollectionIndex].Len() >= 4 && WordList[CollectionIndex].Len() <= 10)
+        {
+            RightLengthWords.Add(WordList[CollectionIndex]);   
+        }
+    return RightLengthWords;
+}
