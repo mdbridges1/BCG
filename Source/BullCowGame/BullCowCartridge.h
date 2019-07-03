@@ -20,7 +20,7 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void ProcessGuess(FString Guess);
 	void SubtractLife();
 	bool IsIsogram(FString Word) const;
-	void PrintBullCows(FString Guess);
+	void GetBullCows(FString Guess) const;
 	FString GetStartingWord();
 	TArray<FString> FilterForIsograms(TArray<FString> WordList) const; 
 	TArray<FString> FilterLength(TArray<FString> WordList) const; 
@@ -30,4 +30,8 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	FString HiddenWord;
 	int Lives;
 	bool bGameOver;
+	int Bulls;
+	int Cows;
+	int &rBulls = Bulls; //int or in32?
+	int &rCows= Cows;
 };

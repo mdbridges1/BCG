@@ -34,9 +34,11 @@ void UBullCowCartridge::InitGame()
 {
     // Set Gamestate
     HiddenWord = GetStartingWord();
-   
     Lives = HiddenWord.Len(); //Good enough difficulty adjustment for now
     bGameOver = false;
+   
+    // DEBUG LINES
+    PrintLine(TEXT("Word is: %s\n"), *HiddenWord);
     
     PrintLine(TEXT("Welcome to Bull Cow Game"));
     PrintLine(TEXT("Guess the %i letter word. \nYou have %i lives"), HiddenWord.Len(), Lives);
@@ -81,15 +83,15 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         return;
     }    
 
-    PrintBullCows(Guess);
+    GetBullCows(Guess);
 
+    PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
     PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);  
 }
 
-void UBullCowCartridge::SubtractLife()
+void UBullCowCartridge::SubtractLife() // if I reference lives instead I can make const?
 {
     --Lives;
-    PrintLine(TEXT("Lost a Life"));
 }
 
 bool UBullCowCartridge::IsIsogram(FString Word) const
@@ -107,17 +109,16 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     return true;
 }
 
-void UBullCowCartridge::PrintBullCows(FString Guess)
+void UBullCowCartridge::GetBullCows(FString Guess) const
 {
-    int32 Bulls = 0;
-    int32 Cows = 0;
-
+    rBulls = 0;
+    rCows = 0;
     for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); ++GuessIndex)
     {
         // Looking for bulls
         if (Guess[GuessIndex] == HiddenWord[GuessIndex])
         {
-            ++Bulls;
+            ++rBulls;
             // You  might inuit this: ++GuessIndex - but it wont work :-(
             continue;    // we could have if else'd this for loop
         }
@@ -127,12 +128,10 @@ void UBullCowCartridge::PrintBullCows(FString Guess)
         {
             if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
             {
-                ++Cows;
+                ++rCows;
             }
         }
     }
-    
-    PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
 }
 
 FString UBullCowCartridge::GetStartingWord()
@@ -143,10 +142,7 @@ FString UBullCowCartridge::GetStartingWord()
 
     FString FoundWord = FilterWordList[FMath::RandRange(0, FilterWordList.Num() - 1)].ToLower(); // Has become case sensitve suddenly?
 
-    return FoundWord;
-    // DEBUG LINES
-    // PrintLine(TEXT("Number of Words: %i"), FilterWordList.Num());    
-    // PrintLine(TEXT("Word is: %s"), *HiddenWord);
+    return FoundWord;    
 }
 
 TArray<FString> UBullCowCartridge::FilterForIsograms(TArray<FString> WordList) const
