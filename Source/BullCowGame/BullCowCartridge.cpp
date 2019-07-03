@@ -13,7 +13,12 @@ Have noticed Gavin's code has a lot of consts with the functions - Why?
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+
     InitGame();
+    // PrintLine(TEXT("Word is: %s"), *HiddenWord); //DEBUG LINE
+
+    PrintLine(TEXT("Welcome to Bull Cow Game"));
+    PrintLine(TEXT("Guess the %i letter word. \nYou have %i lives"), HiddenWord.Len(), Lives);
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -36,12 +41,6 @@ void UBullCowCartridge::InitGame()
     HiddenWord = GetStartingWord();
     Lives = HiddenWord.Len(); //Good enough difficulty adjustment for now
     bGameOver = false;
-   
-    // DEBUG LINES
-    PrintLine(TEXT("Word is: %s"), *HiddenWord);
-    
-    PrintLine(TEXT("Welcome to Bull Cow Game"));
-    PrintLine(TEXT("Guess the %i letter word. \nYou have %i lives"), HiddenWord.Len(), Lives);
 }
 
 void UBullCowCartridge::EndGame()
