@@ -38,7 +38,7 @@ void UBullCowCartridge::InitGame()
     bGameOver = false;
    
     // DEBUG LINES
-    PrintLine(TEXT("Word is: %s\n"), *HiddenWord);
+    PrintLine(TEXT("Word is: %s"), *HiddenWord);
     
     PrintLine(TEXT("Welcome to Bull Cow Game"));
     PrintLine(TEXT("Guess the %i letter word. \nYou have %i lives"), HiddenWord.Len(), Lives);
@@ -83,7 +83,8 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         return;
     }    
 
-    GetBullCows(Guess);
+    int32 Bulls, Cows;
+    GetBullCows(Guess, Bulls, Cows);
 
     PrintLine(TEXT("You have %i Bulls and %i Cows."), Bulls, Cows);
     PrintLine(TEXT("Sorry, try guessing again you have %i lives left"), Lives);  
@@ -94,7 +95,7 @@ void UBullCowCartridge::SubtractLife() // if I reference lives instead I can mak
     --Lives;
 }
 
-bool UBullCowCartridge::IsIsogram(FString Word) const
+bool UBullCowCartridge::IsIsogram(FString Word)
 {
     for (int32 CurrentLetterIndex = 0; CurrentLetterIndex < Word.Len(); ++CurrentLetterIndex)
     {      
@@ -109,16 +110,16 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     return true;
 }
 
-void UBullCowCartridge::GetBullCows(FString Guess) const
+void UBullCowCartridge::GetBullCows(FString Guess, int32& BullCount, int32& CowCount) const
 {
-    rBulls = 0;
-    rCows = 0;
+    BullCount = 0; 
+    CowCount = 0;
     for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); ++GuessIndex)
     {
         // Looking for bulls
         if (Guess[GuessIndex] == HiddenWord[GuessIndex])
         {
-            ++rBulls;
+            ++BullCount;
             // You  might inuit this: ++GuessIndex - but it wont work :-(
             continue;    // we could have if else'd this for loop
         }
@@ -128,7 +129,7 @@ void UBullCowCartridge::GetBullCows(FString Guess) const
         {
             if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
             {
-                ++rCows;
+                ++CowCount;
             }
         }
     }
@@ -145,7 +146,7 @@ FString UBullCowCartridge::GetStartingWord()
     return FoundWord;    
 }
 
-TArray<FString> UBullCowCartridge::FilterForIsograms(TArray<FString> WordList) const
+TArray<FString> UBullCowCartridge::FilterForIsograms(TArray<FString> WordList)
 {
     TArray<FString> IsogramList;
 
@@ -159,7 +160,7 @@ TArray<FString> UBullCowCartridge::FilterForIsograms(TArray<FString> WordList) c
     return IsogramList;
 } 
 
-TArray<FString> UBullCowCartridge::FilterLength(TArray<FString> WordList) const
+TArray<FString> UBullCowCartridge::FilterLength(TArray<FString> WordList)
 {
     TArray<FString> RightLengthWords;
 

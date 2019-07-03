@@ -19,19 +19,15 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void EndGame();
 	void ProcessGuess(FString Guess);
 	void SubtractLife();
-	bool IsIsogram(FString Word) const;
-	void GetBullCows(FString Guess) const;
-	FString GetStartingWord();
-	TArray<FString> FilterForIsograms(TArray<FString> WordList) const; 
-	TArray<FString> FilterLength(TArray<FString> WordList) const; 
+	static bool IsIsogram(FString Word);
+	void GetBullCows(FString Guess, int32& BullCount, int32& CowCount) const;
+	static FString GetStartingWord();
+	static TArray<FString> FilterForIsograms(TArray<FString> WordList); 
+	static TArray<FString> FilterLength(TArray<FString> WordList); 
 
 	// Your declarations go below!
 	private:
 	FString HiddenWord;
 	int Lives;
 	bool bGameOver;
-	int Bulls;
-	int Cows;
-	int &rBulls = Bulls; //int or in32?
-	int &rCows= Cows;
 };
