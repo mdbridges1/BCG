@@ -1,0 +1,11 @@
+{
+	"files.exclude": {
+		"C:/repos/BCG/.git": true,
+		"C:/repos/BCG/.vs": true,
+		"C:/repos/BCG/.vscode": true,
+		"C:/repos/BCG/BullCowGame": true,
+		"C:/repos/BCG/Content": true,
+		"C:/repos/BCG/Intermediate": true,
+		"C:/repos/BCG/Saved": true
+	}
+}
