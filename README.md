@@ -11,3 +11,5 @@ This section is under development, and this readme will be updated once complete
 ### 3 Level Editing
 
 ### 4 The Game Module X Could Not Be Loaded
+
+### 5 Setting Up Your IDE In UE4
