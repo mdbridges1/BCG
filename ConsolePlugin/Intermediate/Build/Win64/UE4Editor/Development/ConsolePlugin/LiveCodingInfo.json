@@ -1,0 +1,15 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.ConsolePlugin.cpp.obj": [
+			"Cartridge.cpp.obj",
+			"ConsolePlugin.cpp.obj",
+			"Terminal.cpp.obj"
+		],
+		"Module.ConsolePlugin.gen.cpp.obj": [
+			"Cartridge.gen.cpp.obj",
+			"ConsolePlugin.init.gen.cpp.obj",
+			"Terminal.gen.cpp.obj"
+		]
+	}
+}

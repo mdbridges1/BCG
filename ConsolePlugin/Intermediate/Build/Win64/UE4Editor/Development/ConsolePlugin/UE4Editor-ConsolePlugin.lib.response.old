@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-ConsolePlugin.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\UnrealProjects\BullCow\BullCowGame\Intermediate\Build\Win64\BullCowGameEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"E:\UnrealProjects\BullCow\BullCowGame\Plugins\ConsolePlugin\Intermediate\Build\Win64\UE4Editor\Development\ConsolePlugin\Module.ConsolePlugin.cpp.obj"
+"E:\UnrealProjects\BullCow\BullCowGame\Plugins\ConsolePlugin\Intermediate\Build\Win64\UE4Editor\Development\ConsolePlugin\Module.ConsolePlugin.gen.cpp.obj"
+"E:\UnrealProjects\BullCow\BullCowGame\Plugins\ConsolePlugin\Intermediate\Build\Win64\UE4Editor\Development\ConsolePlugin\Default.rc2.res"
+/OUT:"E:\UnrealProjects\BullCow\BullCowGame\Plugins\ConsolePlugin\Intermediate\Build\Win64\UE4Editor\Development\ConsolePlugin\UE4Editor-ConsolePlugin.lib"
+/INCLUDE:IMPLEMENT_MODULE_ConsolePlugin

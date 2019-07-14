@@ -13,3 +13,5 @@ This section is under development, and this readme will be updated once complete
 ### 4 The Game Module X Could Not Be Loaded
 
 ### 5 Setting Up Your IDE In UE4
+
+### 6 Actors And Components
